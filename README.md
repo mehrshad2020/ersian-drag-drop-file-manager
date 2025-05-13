@@ -45,7 +45,7 @@
 
 ## پیش‌نمایش
 
-![پیش‌نمایش سیستم مدیریت فایل](preview.png)
+![image](https://github.com/user-attachments/assets/2f4b3c46-fe75-45bc-ba6c-34fb34865262)
 
 ## نصب و راه‌اندازی
 
