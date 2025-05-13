@@ -1,0 +1,442 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #6c7ae0;
+    --accent-color: #f44336;
+    --background-color: #f8f9fc;
+    --card-color: #ffffff;
+    --text-color: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.12);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 20px 0;
+    background-image: linear-gradient(135deg, #f5f7ff 0%, #f8f9fc 100%);
+    direction: rtl;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    position: relative;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Toolbar styles */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    padding: 12px 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.view-options {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.view-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+.view-btn.active {
+    background-color: rgba(74, 107, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.search-box {
+    position: relative;
+    width: 250px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    transition: var(--transition);
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+}
+
+.search-box svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.file-system {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.files-container {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 30px;
+    min-height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    align-content: flex-start;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* List view styles */
+.files-container.list-view {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.files-container.list-view .file-item {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 15px 20px;
+}
+
+.files-container.list-view .file-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+    margin-left: 15px;
+}
+
+.files-container.list-view .file-name {
+    text-align: right;
+    white-space: normal;
+}
+
+.file-item {
+    width: 140px;
+    height: 160px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
+}
+
+.file-item:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(74, 107, 255, 0.2);
+}
+
+.file-item.dragging {
+    opacity: 0.7;
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+}
+
+.file-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.file-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+    transition: var(--transition);
+}
+
+.file-item:hover .file-icon svg {
+    transform: scale(1.1);
+}
+
+.file-name {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    word-break: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.file-item:hover .file-name {
+    color: var(--primary-color);
+}
+
+.trash-bin {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.trash-icon {
+    width: 160px;
+    height: 160px;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.trash-icon:hover {
+    background-color: #fff8f8;
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.trash-icon.highlight {
+    background-color: #ffebee;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.2);
+    border: 2px dashed var(--accent-color);
+}
+
+.trash-icon svg {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    transition: var(--transition);
+    width: 42px;
+    height: 42px;
+}
+
+.trash-icon:hover svg {
+    color: var(--accent-color);
+}
+
+.trash-icon.highlight svg {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.trash-icon span {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.trash-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+    opacity: 0;
+    transition: var(--transition);
+    margin-top: 8px;
+}
+
+.trash-icon:hover .trash-hint,
+.trash-icon.highlight .trash-hint {
+    opacity: 1;
+}
+
+.trash-icon:hover span,
+.trash-icon.highlight span {
+    color: var(--accent-color);
+}
+
+/* File type colors with gradients */
+.file-item[data-type="pdf"] .file-icon {
+    color: #f44336;
+}
+
+.file-item[data-type="doc"] .file-icon,
+.file-item[data-type="docx"] .file-icon {
+    color: #2196f3;
+}
+
+.file-item[data-type="xls"] .file-icon,
+.file-item[data-type="xlsx"] .file-icon {
+    color: #4caf50;
+}
+
+.file-item[data-type="ppt"] .file-icon,
+.file-item[data-type="pptx"] .file-icon {
+    color: #ff9800;
+}
+
+.file-item[data-type="jpg"] .file-icon,
+.file-item[data-type="jpeg"] .file-icon,
+.file-item[data-type="png"] .file-icon {
+    color: #9c27b0;
+}
+
+.file-item[data-type="txt"] .file-icon {
+    color: #607d8b;
+}
+
+.file-item[data-type="zip"] .file-icon,
+.file-item[data-type="rar"] .file-icon {
+    color: #795548;
+}
+
+/* Footer styles */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Animation for deleting files */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+}
+
+.file-item.deleting {
+    animation: fadeOut 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+/* Empty state */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    color: var(--text-secondary);
+}
+
+.empty-state svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    color: #d1d8e0;
+}
+
+.empty-state p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .files-container {
+        padding: 20px;
+        justify-content: center;
+    }
+    
+    .file-item {
+        width: 120px;
+        height: 140px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+} 
